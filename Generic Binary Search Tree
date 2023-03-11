@@ -1,0 +1,148 @@
+public class BinarySearchTree<T extends Comparable<T>> {
+        class  Node<T> {
+            T key;
+            Node left, right;
+
+            public Node(T item) {
+                key = item;
+                left = right = null;
+            }
+        }
+
+        // Root of BST
+        Node root;
+
+        // Constructor
+        BinarySearchTree() {
+            root = null;
+        }
+
+        // This method mainly calls deleteRec()
+        void deleteKey(T key) {
+            root = deleteRec(root, key);
+        }
+
+        /* A recursive function to insert a new key in BST */
+        Node<T> deleteRec(Node root, T key) {
+            /* Base Case: If the tree is empty */
+            if (root == null) return root;
+
+            /* Otherwise, recur down the tree */
+            if (key.compareTo((T) root.key)<0)
+                root.left = deleteRec(root.left, key);
+            else if (key.compareTo((T) root.key)>0 )
+                root.right = deleteRec(root.right, key);
+
+                // if key is same as root's key, then This is the node
+                // to be deleted
+            else {
+                // node with only one child or no child
+                if (root.left == null)
+                    return root.right;
+                else if (root.right == null)
+                    return root.left;
+
+                // node with two children: Get the inorder successor (smallest
+                // in the right subtree)
+                root.key = minValue(root.right);
+
+                // Delete the inorder successor
+                root.right = deleteRec(root.right, (T) root.key);
+            }
+
+            return root;
+        }
+
+        T minValue(Node root) {
+            T minv = (T) root.key;
+            while (root.left != null) {
+                minv = (T) root.left.key;
+                root = root.left;
+            }
+            return minv;
+        }
+
+        // This method mainly calls insertRec()
+        void insert(T key) {
+            root = insertRec(root, key);
+        }
+
+        /* A recursive function to insert a new key in BST */
+        Node<T> insertRec(Node root, T key) {
+
+            /* If the tree is empty, return a new node */
+            if (root == null) {
+                root = new Node(key);
+                return root;
+            }
+
+            /* Otherwise, recur down the tree */
+            if (key.compareTo((T) root.key)<0 )
+                root.left = insertRec(root.left, key);
+            else if (key.compareTo((T) root.key)>0 )
+                root.right = insertRec(root.right, key);
+
+            /* return the (unchanged) node pointer */
+            return root;
+        }
+
+        // This method mainly calls InorderRec()
+        void inorder() {
+            inorderRec(root);
+        }
+
+        // A utility function to do inorder traversal of BST
+        void inorderRec(Node root) {
+            if (root != null) {
+                inorderRec(root.left);
+                System.out.print(root.key + " ");
+                inorderRec(root.right);
+            }
+        }
+    void preOrder() {
+        inorderRec(root);
+    }
+
+    // A utility function to do pre Order traversal of BST
+    private void preOrderRec(Node root) {
+        if (root != null) {
+            System.out.print(root.key + " ");
+            preOrderRec(root.left);
+            preOrderRec(root.right);
+        }
+    }
+    void postOrder() {
+        inorderRec(root);
+    }
+
+    // A utility function to do Post Order traversal of BST
+    void postOrderRec(Node root) {
+        if (root != null) {
+            preOrderRec(root.left);
+            System.out.print(root.key + " ");
+            preOrderRec(root.right);
+        }
+    }
+
+        public static void main(String[] args) {
+            BinarySearchTree<String> tree = new BinarySearchTree<String>();
+
+
+            tree.insert("Usama");
+            tree.insert("Hamza");
+            tree.insert("Ammad");
+            tree.insert("Shams");
+            tree.insert("Bilal");
+
+            tree.insert("Zulqarnain");
+
+            System.out.println("Inorder traversal of the given tree");
+            tree.inorder();
+
+            System.out.println("\nBilal");
+            tree.deleteKey("Bilal");
+            System.out.println("Inorder traversal of the given tree");
+            tree.inorder();
+        }
+    }
+

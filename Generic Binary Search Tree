@@ -119,8 +119,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
     void postOrderRec(Node root) {
         if (root != null) {
             preOrderRec(root.left);
-            System.out.print(root.key + " ");
             preOrderRec(root.right);
+            System.out.print(root.key + " ");
         }
     }
 

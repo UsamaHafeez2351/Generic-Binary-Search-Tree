@@ -9,6 +9,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             }
         }
 
+
         // Root of BST
         Node root;
 
@@ -115,7 +116,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         inorderRec(root);
     }
 
-    // A utility function to do Post Order traversal of BST
+    // function to do Post Order traversal of BST
     void postOrderRec(Node root) {
         if (root != null) {
             preOrderRec(root.left);

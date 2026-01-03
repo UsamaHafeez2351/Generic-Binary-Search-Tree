@@ -13,7 +13,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         // Root of BST
         Node root;
 
-        // Constructor
+        // Constructor method
         BinarySearchTree() {
             root = null;
         }

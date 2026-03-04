@@ -3,7 +3,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             T key;
             Node left, right;
 
-            public Node(T item) {
+            public Node(T item) { 
                 key = item;
                 left = right = null;
             }
